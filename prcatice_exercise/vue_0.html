@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+	
+	<div id="app">
+		<!-- data from the vue script -->
+		{{message}}
+	</div>
+	
+	<script>
+	var app = new Vue({
+		//div of html
+		el: '#app',
+		//data to be printed
+		data:{
+			message: 'trying to learn vue.js'	
+		}
+	});
+
+	//tried
+	//	app.message="Rage, rage against the dying of the light";
+	//app.message="Yes! we can do it.";
+	//app.message="Hello Summer";
+	
+	</script>
+	</body>
+</html>

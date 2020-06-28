@@ -1,0 +1,29 @@
+body {
+  background-color: azure;
+}
+
+a {
+  text-decoration: none;
+}
+
+.logo h3 {
+  margin: 0;
+}
+
+.game-board {
+  border: 5px #110675 solid;
+  width: 350px;
+  margin: 0 auto;
+}
+
+.column {
+  cursor: pointer;
+}
+
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}

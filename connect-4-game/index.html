@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Connect 4 Game</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<script type="x-template" id="board-checker-template">
+  <transition
+    @enter="enter"
+    :css="false">
+    <circle
+      :cx="centerX"
+      :cy="centerY"
+      :r="checkerRadius"
+      :fill="adjustedColor"
+      :fill-opacity="opacity"
+      />
+  </transition>
+</script>
+
+<script type="x-template" id="board-column-template">
+  <svg :x="col * cellSize" y="0">
+    <g @click="drop(col)" class="column">
+      <board-checker
+        v-for="checker in checkers"
+        :key="key(checker)"
+        :checker="checker"
+        :cellSize="cellSize"
+        :rowCount="rowCount"
+        :checkerRadius="checkerRadius"
+        :status="status"
+        @land="land"
+        />
+      <rect
+        :class="status"
+        :key="col"
+        :col="col"
+        :width="cellSize"
+        :height="boardHeight"
+        :fill="color"
+        :fill-opacity="opacity"
+        :mask="mask"
+        />
+    </g>
+  </svg>
+</script>
+
+<script type="x-template" id="game-board-template">
+  <svg :viewBox="`0 0 ${boardWidth} ${boardHeight}`"
+    xmlns="http://www.w3.org/2000/svg"
+    class="game-board" stroke="none">
+    <defs>
+      <pattern :id="patternId" patternUnits="userSpaceOnUse" :width="cellSize" :height="cellSize">
+        <circle :cx="cellSize / 2" :cy="cellSize / 2" :r="checkerRadius" fill="black"></circle>
+      </pattern>
+      <mask :id="maskId">
+        <rect :width="cellSize" :height="boardHeight" fill="white"></rect>
+        <rect :width="cellSize" :height="boardHeight" :fill="pattern"></rect>
+      </mask>
+    </defs>
+    <board-column
+      v-for="col in cols"
+      :key="col"
+      :checkers="colCheckers(col)"
+      :col="col"
+      :color="'blue'"
+      :cellSize="cellSize"
+      :checkerRadius="checkerRadius"
+      :boardHeight="boardHeight"
+      :rowCount="rowCount"
+      :mask="mask"
+      :status="status"
+      @drop="drop"
+      @land="land"
+      />
+  </svg>
+</script>
+
+<script type="x-template" id="game-container-template">
+  <div>
+    <p>
+      {{ instructions }}  
+    </p>
+    <game-board
+      :checkers="checkers"
+      :rowCount="rowCount"
+      :colCount="colCount"
+      :status="status"
+      @drop="drop"
+      @land="land"
+      ></game-board>
+    <p v-if="gameOver">
+      {{ overMessage }}
+      <a href="#" @click="reset">Play again</a>
+    </p>
+    <p v-else>
+      {{ whoseTurn }}
+    </p>
+  </div>    
+</script>
+
+<div id="app">
+  <h3>Connect Four</h3>
+  <game-container></game-container>
+</div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>
+
+<!-- Referance : https://rossta.net/blog/basic-connect-four-with-vuejs.html -->
+<!-- Referance : https://rossta.net/blog/finding-four-in-a-row-ftw.html -->
