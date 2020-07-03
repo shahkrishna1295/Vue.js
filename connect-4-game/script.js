@@ -269,6 +269,10 @@ const GameContainer = Vue.component('game-container', {
       }
     },
 
+//  check all viable horizonal segments FOR THE WIN. Return the winner OR
+//  check all viable vertical segments FTW. Return the winner OR
+//  check all viable "forward slash" segments FTW. Return the winner OR
+//  check all viable "back slash" segments FTW. Return the winner OR
     //logic for draw game
     checkForDraw() {
       this.isDraw = Object.keys(this.checkers).length === this.rowCount * this.colCount;
