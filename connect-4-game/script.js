@@ -23,8 +23,6 @@ const BoardChecker = Vue.component('board-checker', {
         yellow: '#f0ed35',
         red: '#ff1f1f',
         } };
-
-
   },
 
   computed: {
@@ -124,6 +122,7 @@ const BoardColumn = Vue.component('board-column', {
 
 
 //container to setup the rows and columns in a box
+//defining the dimensions of the board layout
 const GameBoard = Vue.component('game-board', {
   template: '#game-board-template',
   props: ['checkers', 'rowCount', 'colCount', 'status'],
@@ -141,9 +140,11 @@ const GameBoard = Vue.component('game-board', {
 
   //layout of the board, sizes of the columns, rows and checkers 
   computed: {
+    //here mask created checkers
     pattern() {return cssUrl(this.patternId);},
     mask() {return cssUrl(this.maskId);},
 
+    //retuns rows and col numbers
     rows() {return range(this.rowCount);},
     cols() {return range(this.colCount);},
 
@@ -168,6 +169,7 @@ const GameBoard = Vue.component('game-board', {
 
 
 //the main continer that calls all the data needed to play from other containers
+//this renders game board
 const GameContainer = Vue.component('game-container', {
   template: "#game-container-template",
 
@@ -177,6 +179,7 @@ const GameContainer = Vue.component('game-container', {
 
   data() {
     return {
+      //object to store the checkers
       checkers: {},
       isLocked: false,
       playerColor: color1,
@@ -326,6 +329,7 @@ const GameContainer = Vue.component('game-container', {
       }
     },
 
+    //method to check for winner
     checkForWinFrom(lastChecker) {
       if (!lastChecker) return;
       const { row: focalRow, col: focalCol } = lastChecker;
